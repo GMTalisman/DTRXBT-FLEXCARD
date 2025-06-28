@@ -67,7 +67,7 @@ positions = {
 }
 
 max_width = 1000
-right_edge_x = 995  # Right edge for ticker symbol to align against
+right_edge_x = 1025  # Right edge for ticker symbol to align against
 
 # Draw text function for main font (Roboto Mono)
 def draw_text(draw, position, text, max_width, font_size, color="white"):
