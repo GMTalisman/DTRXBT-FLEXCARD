@@ -31,7 +31,7 @@ def load_token_font(size):
 # Font sizes
 base_font_size = 60
 percent_font_size = base_font_size * 2
-token_symbol_font_size = int(base_font_size * 1.5)
+token_symbol_font_size = int(base_font_size * 1.3)
 
 # User input
 with st.form("input_form"):
@@ -63,10 +63,11 @@ positions = {
     "Mark Price": (450, 685),
     "ATH": (225, 870),
     "%": (180, percent_y),
-    "Token Symbol": (700, 935)  # Adjust as needed
+    "Token Symbol": (725, 935)  # The Y-position still comes from here
 }
 
 max_width = 1000
+right_edge_x = 900  # Right edge for ticker symbol to align against
 
 # Draw text function for main font (Roboto Mono)
 def draw_text(draw, position, text, max_width, font_size, color="white"):
@@ -87,17 +88,22 @@ if submitted:
     img = template.copy()
     draw = ImageDraw.Draw(img)
 
-    # Draw token symbol in Manrope ExtraBold
+    # Draw token symbol with right-alignment behavior
     token_font = load_token_font(token_symbol_font_size)
     bbox = draw.textbbox((0, 0), token_symbol, font=token_font)
-    draw.text(positions["Token Symbol"], token_symbol, font=token_font, fill="white")
+    text_width = bbox[2] - bbox[0]
+
+    x = right_edge_x - text_width  # Moves left if text is wider
+    y = positions["Token Symbol"][1]
+
+    draw.text((x, y), token_symbol, font=token_font, fill="white")
 
     # Draw data with dollar signs
     draw_text(draw, positions["Entry Price"], f"${entry_price}", max_width, base_font_size, color="white")
     draw_text(draw, positions["Mark Price"], f"${mark_price}", max_width, base_font_size, color="white")
     draw_text(draw, positions["ATH"], f"${ath}", max_width, base_font_size, color="white")
 
-    # Draw percentage in your signature green/blue
+    # Draw percentage in signature green/blue
     draw_text(draw, positions["%"], percent_change, max_width, percent_font_size, color="#12ee0e")
 
     # Show image
