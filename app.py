@@ -56,7 +56,7 @@ except:
 
 # Positioning
 img_height = template.height
-percent_y = int(img_height * 0.75)  # 25% from bottom
+percent_y = int(img_height * 0.80)  # 20% from bottom
 
 positions = {
     "Entry Price": (450, 505),
