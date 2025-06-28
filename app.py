@@ -12,7 +12,7 @@ except Exception:
     st.error("❌ Template image not found. Make sure 'template.png' is in the same directory.")
     st.stop()
 
-# Load font with fallback (for main text)
+# Load main font (Roboto Mono Bold)
 def load_font(size):
     try:
         return ImageFont.truetype("RobotoMono-Bold.ttf", size)
@@ -20,18 +20,18 @@ def load_font(size):
         st.warning("⚠️ Roboto Mono font not found. Using default font instead.")
         return ImageFont.load_default()
 
-# Load Courier New Bold font for Token Symbol
+# Load Manrope font for Token Symbol
 def load_token_font(size):
     try:
-        return ImageFont.truetype("Manrope-VariableFont_wght", size)  # Courier New Bold
+        return ImageFont.truetype("Manrope-VariableFont_wght.ttf", size)
     except OSError:
-        st.warning("⚠️ Courier Bold font not found. Using default font instead.")
+        st.warning("⚠️ Manrope font not found. Using default font instead.")
         return ImageFont.load_default()
 
 # Font sizes
 base_font_size = 60
 percent_font_size = base_font_size * 2
-token_symbol_font_size = int(base_font_size * 1.5)
+token_symbol_font_size = int(base_font_size * 1.3)
 
 # User input
 with st.form("input_form"):
@@ -63,12 +63,12 @@ positions = {
     "Mark Price": (450, 685),
     "ATH": (225, 870),
     "%": (180, percent_y),
-    "Token Symbol": (725, 935)  # Adjust if needed
+    "Token Symbol": (725, 935)  # Adjust as needed
 }
 
 max_width = 1000
 
-# Draw text function with color support
+# Draw text function for main font (Roboto Mono)
 def draw_text(draw, position, text, max_width, font_size, color="white"):
     font = load_font(font_size)
     bbox = draw.textbbox((0, 0), text, font=font)
@@ -87,7 +87,7 @@ if submitted:
     img = template.copy()
     draw = ImageDraw.Draw(img)
 
-    # Draw token symbol in Courier New Bold
+    # Draw token symbol in Manrope
     token_font = load_token_font(token_symbol_font_size)
     bbox = draw.textbbox((0, 0), token_symbol, font=token_font)
     draw.text(positions["Token Symbol"], token_symbol, font=token_font, fill="white")
@@ -97,7 +97,7 @@ if submitted:
     draw_text(draw, positions["Mark Price"], f"${mark_price}", max_width, base_font_size, color="white")
     draw_text(draw, positions["ATH"], f"${ath}", max_width, base_font_size, color="white")
 
-    # Draw percentage in hot blue/green (your selected color)
+    # Draw percentage in hot green (or blue, per your style)
     draw_text(draw, positions["%"], percent_change, max_width, percent_font_size, color="#12ee0e")
 
     # Show image
