@@ -1,4 +1,3 @@
-
 import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 import os
@@ -9,11 +8,11 @@ st.title("🔐 DTR Image Generator")
 # Load template
 try:
     template = Image.open("template.png")
-except Exception as e:
+except Exception:
     st.error("❌ Template image not found. Make sure 'template.png' is in the same directory.")
     st.stop()
 
-# Font setup with fallback
+# Load font with fallback
 def load_font(size):
     try:
         return ImageFont.truetype("RobotoMono-Bold.ttf", size)
@@ -21,10 +20,11 @@ def load_font(size):
         st.warning("⚠️ Font file not found. Using default font instead.")
         return ImageFont.load_default()
 
+# Font sizes
 base_font_size = 60
 percent_font_size = base_font_size * 2
 
-# Form input
+# User input
 with st.form("input_form"):
     col1, col2 = st.columns(2)
     entry_price = col1.text_input("Entry Price", "0.00")
@@ -32,7 +32,7 @@ with st.form("input_form"):
     ath = col1.text_input("ATH", "0.00")
     submitted = st.form_submit_button("Generate Image")
 
-# Auto-calculate percent change
+# Calculate percentage change
 try:
     entry = float(entry_price)
     mark = float(mark_price)
@@ -44,21 +44,21 @@ try:
 except:
     percent_change = "+0.00%"
 
-# Text positions
+# Positioning
 img_height = template.height
-percent_y = int(img_height * 0.80)  # 20% from bottom
+percent_y = int(img_height * 0.70)  # 30% from bottom
 
 positions = {
-    "Entry Price": (750, 450),
-    "Mark Price": (750, 650),
-    "ATH": (750, 850),
-    "%": (150, percent_y)  # dynamic bottom placement
+    "Entry Price": (450, 505),
+    "Mark Price": (450, 685),
+    "ATH": (225, 870),
+    "%": (180, percent_y)  # dynamic bottom placement
 }
 
 max_width = 1000
 
-# Draw text function
-def draw_text(draw, position, text, max_width, font_size):
+# Draw text function with color support
+def draw_text(draw, position, text, max_width, font_size, color="white"):
     font = load_font(font_size)
     bbox = draw.textbbox((0, 0), text, font=font)
     text_width = bbox[2] - bbox[0]
@@ -69,20 +69,25 @@ def draw_text(draw, position, text, max_width, font_size):
         bbox = draw.textbbox((0, 0), text, font=font)
         text_width = bbox[2] - bbox[0]
 
-    draw.text(position, text, font=font, fill="white")
+    draw.text(position, text, font=font, fill=color)
 
 # Generate image
 if submitted:
     img = template.copy()
     draw = ImageDraw.Draw(img)
 
-    draw_text(draw, positions["Entry Price"], str(entry_price), max_width, base_font_size)
-    draw_text(draw, positions["Mark Price"], str(mark_price), max_width, base_font_size)
-    draw_text(draw, positions["ATH"], str(ath), max_width, base_font_size)
-    draw_text(draw, positions["%"], str(percent_change), max_width, percent_font_size)
+    # Draw data with dollar signs
+    draw_text(draw, positions["Entry Price"], f"${entry_price}", max_width, base_font_size, color="white")
+    draw_text(draw, positions["Mark Price"], f"${mark_price}", max_width, base_font_size, color="white")
+    draw_text(draw, positions["ATH"], f"${ath}", max_width, base_font_size, color="white")
 
+    # Percent in aqua blue
+    draw_text(draw, positions["%"], percent_change, max_width, percent_font_size, color="#12ee0e")
+
+    # Show image
     st.image(img, caption="Generated Image", use_container_width=True)
 
+    # Download button
     output_path = "output.png"
     img.save(output_path)
     with open(output_path, "rb") as file:
