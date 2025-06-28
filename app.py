@@ -23,7 +23,7 @@ def load_font(size):
 # Load Courier New Bold font for Token Symbol
 def load_token_font(size):
     try:
-        return ImageFont.truetype("courbd.ttf", size)  # Courier New Bold
+        return ImageFont.truetype("Manrope-VariableFont_wght", size)  # Courier New Bold
     except OSError:
         st.warning("⚠️ Courier Bold font not found. Using default font instead.")
         return ImageFont.load_default()
