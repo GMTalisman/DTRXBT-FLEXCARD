@@ -55,7 +55,7 @@ positions = {
     "Mark Price": (450, 685),
     "ATH": (225, 870),
     "%": (180, percent_y),
-    "Token Symbol": (775, 945)  # ← Adjust this position if needed
+    "Token Symbol": (725, 935)  # ← Adjust this position if needed
 }
 
 max_width = 1000
