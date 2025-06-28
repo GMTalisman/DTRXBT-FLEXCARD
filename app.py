@@ -56,13 +56,13 @@ except:
 
 # Positioning
 img_height = template.height
-percent_y = int(img_height * 0.77)  # 23% from bottom
+percent_y = int(img_height * 0.80)  # 20% from bottom
 
 positions = {
     "Entry Price": (450, 505),
     "Mark Price": (450, 685),
     "ATH": (225, 870),
-    "%": (300, percent_y),
+    "%": (325, percent_y),
     "Token Symbol": (725, 1015)  # The Y-position still comes from here
 }
 
