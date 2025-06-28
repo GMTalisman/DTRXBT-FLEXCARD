@@ -62,7 +62,7 @@ positions = {
     "Entry Price": (450, 505),
     "Mark Price": (450, 685),
     "ATH": (225, 870),
-    "%": (325, percent_y),
+    "%": (375, percent_y),
     "Token Symbol": (725, 1015)  # The Y-position still comes from here
 }
 
