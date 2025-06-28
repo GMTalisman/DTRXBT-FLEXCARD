@@ -31,7 +31,7 @@ def load_token_font(size):
 # Font sizes
 base_font_size = 60
 percent_font_size = base_font_size * 2
-token_symbol_font_size = int(base_font_size * 1.75)
+token_symbol_font_size = int(base_font_size * 1.3)
 
 # User input
 with st.form("input_form"):
@@ -56,18 +56,18 @@ except:
 
 # Positioning
 img_height = template.height
-percent_y = int(img_height * 0.80)  # 20% from bottom
+percent_y = int(img_height * 0.75)  # 25% from bottom
 
 positions = {
     "Entry Price": (450, 505),
     "Mark Price": (450, 685),
     "ATH": (225, 870),
-    "%": (375, percent_y),
-    "Token Symbol": (725, 1015)  # The Y-position still comes from here
+    "%": (180, percent_y),
+    "Token Symbol": (725, 935)  # Y-position stays the same
 }
 
 max_width = 1000
-right_edge_x = 1000  # Right edge for ticker symbol to align against
+right_edge_x = 900  # Right edge lock for ticker
 
 # Draw text function for main font (Roboto Mono)
 def draw_text(draw, position, text, max_width, font_size, color="white"):
@@ -88,34 +88,47 @@ if submitted:
     img = template.copy()
     draw = ImageDraw.Draw(img)
 
-    # Draw token symbol with right-alignment behavior
+    # Draw token symbol with right-alignment
     token_font = load_token_font(token_symbol_font_size)
     bbox = draw.textbbox((0, 0), token_symbol, font=token_font)
     text_width = bbox[2] - bbox[0]
 
-    x = right_edge_x - text_width  # Moves left if text is wider
+    x = right_edge_x - text_width  # Shifts left if ticker is longer
     y = positions["Token Symbol"][1]
 
     draw.text((x, y), token_symbol, font=token_font, fill="white")
 
-    # Draw data with dollar signs
+    # Draw other data with dollar signs
     draw_text(draw, positions["Entry Price"], f"${entry_price}", max_width, base_font_size, color="white")
     draw_text(draw, positions["Mark Price"], f"${mark_price}", max_width, base_font_size, color="white")
     draw_text(draw, positions["ATH"], f"${ath}", max_width, base_font_size, color="white")
 
-    # Draw percentage in signature green/blue
+    # Draw percentage in signature color
     draw_text(draw, positions["%"], percent_change, max_width, percent_font_size, color="#12ee0e")
 
-    # Show image
+    # Show image preview
     st.image(img, caption="Generated Image", use_container_width=True)
 
-    # Download button
-    output_path = "output.png"
-    img.save(output_path)
-    with open(output_path, "rb") as file:
+    # Save PNG
+    output_png = "output.png"
+    img.save(output_png)
+
+    with open(output_png, "rb") as file:
         st.download_button(
-            label="📥 Download Image",
+            label="📥 Download PNG",
             data=file,
             file_name="DTR_image.png",
             mime="image/png"
+        )
+
+    # Save JPEG (convert to RGB because JPEG doesn't support alpha)
+    output_jpg = "output.jpg"
+    img.convert('RGB').save(output_jpg, "JPEG")
+
+    with open(output_jpg, "rb") as file:
+        st.download_button(
+            label="📥 Download JPEG",
+            data=file,
+            file_name="DTR_image.jpg",
+            mime="image/jpeg"
         )
