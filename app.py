@@ -31,7 +31,7 @@ def load_token_font(size):
 # Font sizes
 base_font_size = 60
 percent_font_size = base_font_size * 2
-token_symbol_font_size = int(base_font_size * 1.5)
+token_symbol_font_size = int(base_font_size * 1.75)
 
 # User input
 with st.form("input_form"):
