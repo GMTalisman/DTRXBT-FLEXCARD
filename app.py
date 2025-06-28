@@ -31,7 +31,7 @@ def load_token_font(size):
 # Font sizes
 base_font_size = 60
 percent_font_size = base_font_size * 2
-token_symbol_font_size = int(base_font_size * 2)
+token_symbol_font_size = int(base_font_size * 1.5)
 
 # User input
 with st.form("input_form"):
@@ -63,7 +63,7 @@ positions = {
     "Mark Price": (450, 685),
     "ATH": (225, 870),
     "%": (180, percent_y),
-    "Token Symbol": (725, 935)  # Adjust as needed
+    "Token Symbol": (700, 935)  # Adjust as needed
 }
 
 max_width = 1000
