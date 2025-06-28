@@ -80,8 +80,7 @@ if submitted:
     draw = ImageDraw.Draw(img)
 
     # Draw token symbol
-    draw_text(draw, positions["Token Symbol"], token_symbol, max_width, base_font_size, color="white")
-
+    draw_text(draw, positions["Token Symbol"], token_symbol, max_width, token_symbol_font_size, color="white")
     # Draw data with dollar signs
     draw_text(draw, positions["Entry Price"], f"${entry_price}", max_width, base_font_size, color="white")
     draw_text(draw, positions["Mark Price"], f"${mark_price}", max_width, base_font_size, color="white")
