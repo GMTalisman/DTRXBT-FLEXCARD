@@ -20,12 +20,12 @@ def load_font(size):
         st.warning("⚠️ Roboto Mono font not found. Using default font instead.")
         return ImageFont.load_default()
 
-# Load Manrope font for Token Symbol
+# Load Manrope ExtraBold for Token Symbol
 def load_token_font(size):
     try:
-        return ImageFont.truetype("Manrope-VariableFont_wght.ttf", size)
+        return ImageFont.truetype("Manrope-ExtraBold.ttf", size)
     except OSError:
-        st.warning("⚠️ Manrope font not found. Using default font instead.")
+        st.warning("⚠️ Manrope ExtraBold font not found. Using default font instead.")
         return ImageFont.load_default()
 
 # Font sizes
@@ -87,7 +87,7 @@ if submitted:
     img = template.copy()
     draw = ImageDraw.Draw(img)
 
-    # Draw token symbol in Manrope
+    # Draw token symbol in Manrope ExtraBold
     token_font = load_token_font(token_symbol_font_size)
     bbox = draw.textbbox((0, 0), token_symbol, font=token_font)
     draw.text(positions["Token Symbol"], token_symbol, font=token_font, fill="white")
@@ -97,7 +97,7 @@ if submitted:
     draw_text(draw, positions["Mark Price"], f"${mark_price}", max_width, base_font_size, color="white")
     draw_text(draw, positions["ATH"], f"${ath}", max_width, base_font_size, color="white")
 
-    # Draw percentage in hot green (or blue, per your style)
+    # Draw percentage in your signature green/blue
     draw_text(draw, positions["%"], percent_change, max_width, percent_font_size, color="#12ee0e")
 
     # Show image
