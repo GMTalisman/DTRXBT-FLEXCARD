@@ -23,6 +23,7 @@ def load_font(size):
 # Font sizes
 base_font_size = 60
 percent_font_size = base_font_size * 2
+token_symbol_font_size = int(base_font_size * 1.3)
 
 # User input
 with st.form("input_form"):
