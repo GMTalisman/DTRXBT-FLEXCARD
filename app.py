@@ -12,12 +12,20 @@ except Exception:
     st.error("❌ Template image not found. Make sure 'template.png' is in the same directory.")
     st.stop()
 
-# Load font with fallback
+# Load font with fallback (for main text)
 def load_font(size):
     try:
         return ImageFont.truetype("RobotoMono-Bold.ttf", size)
     except OSError:
-        st.warning("⚠️ Font file not found. Using default font instead.")
+        st.warning("⚠️ Roboto Mono font not found. Using default font instead.")
+        return ImageFont.load_default()
+
+# Load Courier New Bold font for Token Symbol
+def load_token_font(size):
+    try:
+        return ImageFont.truetype("courbd.ttf", size)  # Courier New Bold
+    except OSError:
+        st.warning("⚠️ Courier Bold font not found. Using default font instead.")
         return ImageFont.load_default()
 
 # Font sizes
@@ -55,7 +63,7 @@ positions = {
     "Mark Price": (450, 685),
     "ATH": (225, 870),
     "%": (180, percent_y),
-    "Token Symbol": (725, 935)  # ← Adjust this position if needed
+    "Token Symbol": (725, 935)  # Adjust if needed
 }
 
 max_width = 1000
@@ -79,14 +87,17 @@ if submitted:
     img = template.copy()
     draw = ImageDraw.Draw(img)
 
-    # Draw token symbol
-    draw_text(draw, positions["Token Symbol"], token_symbol, max_width, token_symbol_font_size, color="white")
+    # Draw token symbol in Courier New Bold
+    token_font = load_token_font(token_symbol_font_size)
+    bbox = draw.textbbox((0, 0), token_symbol, font=token_font)
+    draw.text(positions["Token Symbol"], token_symbol, font=token_font, fill="white")
+
     # Draw data with dollar signs
     draw_text(draw, positions["Entry Price"], f"${entry_price}", max_width, base_font_size, color="white")
     draw_text(draw, positions["Mark Price"], f"${mark_price}", max_width, base_font_size, color="white")
     draw_text(draw, positions["ATH"], f"${ath}", max_width, base_font_size, color="white")
 
-    # Draw percentage in hot blue
+    # Draw percentage in hot blue/green (your selected color)
     draw_text(draw, positions["%"], percent_change, max_width, percent_font_size, color="#12ee0e")
 
     # Show image
