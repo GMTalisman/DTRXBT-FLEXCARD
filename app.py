@@ -63,7 +63,7 @@ positions = {
     "Mark Price": (450, 685),
     "ATH": (225, 870),
     "%": (375, percent_y),
-    "Token Symbol": (725, 1015)  # The Y-position still comes from here
+    "Token Symbol": (725, 1015)  # Y-position still comes from here
 }
 
 max_width = 1000
@@ -89,51 +89,4 @@ if submitted:
     draw = ImageDraw.Draw(img)
 
     # Draw token symbol with right-alignment behavior
-    token_font = load_token_font(token_symbol_font_size)
-    bbox = draw.textbbox((0, 0), token_symbol, font=token_font)
-    text_width = bbox[2] - bbox[0]
-
-    x = right_edge_x - text_width  # Moves left if text is wider
-    y = positions["Token Symbol"][1]
-
-    draw.text((x, y), token_symbol, font=token_font, fill="white")
-
-    # Draw data with dollar signs
-    draw_text(draw, positions["Entry Price"], f"${entry_price}", max_width, base_font_size, color="white")
-    draw_text(draw, positions["Mark Price"], f"${mark_price}", max_width, base_font_size, color="white")
-    draw_text(draw, positions["ATH"], f"${ath}", max_width, base_font_size, color="white")
-
-    # Draw percentage in signature green/blue
-    draw_text(draw, positions["%"], percent_change, max_width, percent_font_size, color="#12ee0e")
-
-    # Show image
-    st.image(img, caption="Generated Image", use_container_width=# ✅ Long Press Save Preview
-st.subheader("📱 Long Press Image to Save to Photos")
-st.image(img, caption="✅ On mobile: Long press → 'Add to Photos' or 'Save Image'", use_container_width=True)
-
-# ✅ Banner above download buttons
-st.info("📱 On mobile: Long press and hold the image above to save it directly to Photos or Gallery.")
-
-# ✅ Save PNG
-output_png = "output.png"
-img.save(output_png)
-
-with open(output_png, "rb") as file:
-    st.download_button(
-        label="📥 Download PNG",
-        data=file,
-        file_name="DTR_image.png",
-        mime="image/png"
-    )
-
-# ✅ Save JPEG (convert from RGBA to RGB to avoid transparency issues)
-output_jpg = "output.jpg"
-img.convert('RGB').save(output_jpg, "JPEG")
-
-with open(output_jpg, "rb") as file:
-    st.download_button(
-        label="📥 Download JPEG",
-        data=file,
-        file_name="DTR_image.jpg",
-        mime="image/jpeg"
-    )
+    token_font = load_token_font(_
