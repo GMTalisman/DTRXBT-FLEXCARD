@@ -109,6 +109,10 @@ if submitted:
     # Show image
     st.image(img, caption="Generated Image", use_container_width=True)
 
+    # ✅ Long Press Save Preview for Mobile
+    st.subheader("📱 Long Press Image to Save to Photos")
+    st.image(img, caption="✅ On mobile: Long press → 'Add to Photos' or 'Save Image'", use_container_width=True)
+
     # Download button
     output_path = "output.png"
     img.save(output_path)
