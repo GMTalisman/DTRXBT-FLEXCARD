@@ -39,7 +39,7 @@ with st.form("input_form"):
     entry_price = col1.text_input("Entry Price", "0.00")
     mark_price = col2.text_input("Mark Price", "0.00")
     ath = col1.text_input("ATH", "0.00")
-    token_symbol = col2.text_input("Token Symbol", "")
+    token_symbol = col2.text_input("Token Symbol", "").upper()
     submitted = st.form_submit_button("Generate Image")
 
 # Calculate percentage change
