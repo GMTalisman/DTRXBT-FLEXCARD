@@ -106,6 +106,9 @@ if submitted:
     # Draw percent in green/blue
     draw_text(draw, positions["%"], percent_change, max_width, percent_font_size, color="#12ee0e")
 
+    # ✅ Long Press Save Image Preview
+    st.image(img, caption="✅ On mobile: Long press → 'Add to Photos' or 'Save Image'", use_container_width=True)
+
     # ✅ Big Banner at Bottom (2.5x font size)
     st.markdown(
         "<div style='background-color:#0E1117; padding:10px; border-radius:8px;'>"
