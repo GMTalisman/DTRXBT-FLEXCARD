@@ -116,13 +116,13 @@ if submitted:
     # ✅ Display image (no caption)
     st.image(img, use_container_width=True)
 
-    # ✅ Bottom Banner (Large Font)
- st.markdown(
-    "<div style='background-color:#0E1117; padding:6px 10px; border-radius:8px;'>"
-    "<p style='text-align:center; color:white; font-size:1.5em; margin: 0;'>📱 Long Press Image to Save to Photos</p>"
-    "</div>",
-    unsafe_allow_html=True
-)
+    # ✅ Slim Bottom Banner (Fits on One Line)
+    st.markdown(
+        "<div style='background-color:#0E1117; padding:6px 10px; border-radius:8px;'>"
+        "<p style='text-align:center; color:white; font-size:1.5em; margin:0;'>📱 Long Press Image to Save to Photos</p>"
+        "</div>",
+        unsafe_allow_html=True
+    )
 
     # ✅ Save PNG
     output_png = "output.png"
