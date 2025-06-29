@@ -3,7 +3,11 @@ from PIL import Image, ImageDraw, ImageFont
 import os
 
 st.set_page_config(page_title="DTRXBT FLEX CARD", layout="centered")
-st.title("DTRXBT FLEX CARD")
+st.markdown(
+    "<h1 style='text-align: center;'>🔐 DTRXBT<br>FLEX CARD</h1>",
+    unsafe_allow_html=True
+)
+
 
 # Load template
 try:
