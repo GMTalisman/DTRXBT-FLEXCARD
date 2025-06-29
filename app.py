@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 import os
 
-st.set_page_config(page_title="DTRXBT FLEX CARD", layout="centered")
+st.set_page_config(page_title="DTRXBT FLEX CARD", layout="left")
 st.markdown(
     "<h1 style='text-align: center;'> DTRXBT<br>FLEX CARD</h1>",
     unsafe_allow_html=True
