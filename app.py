@@ -2,12 +2,15 @@ import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 import os
 
-st.set_page_config(page_title="DTRXBT FLEX CARD", layout="centered")
+st.set_page_config(page_title="DTR Flex Card", layout="centered")
+
+# ✅ Title at 70% size, single line, centered
 st.markdown(
-    "<h1 style='text-align: center;'> DTRXBT<br>FLEX CARD</h1>",
+    "<div style='text-align:center; padding-bottom: 10px;'>"
+    "<p style='font-size:1.75em; color:white;'>DTR Flex Card</p>"
+    "</div>",
     unsafe_allow_html=True
 )
-
 
 # Load template
 try:
@@ -60,7 +63,7 @@ except:
 
 # Positioning
 img_height = template.height
-percent_y = int(img_height * 0.80)  # 20% from bottom
+percent_y = int(img_height * 0.80)
 
 positions = {
     "Entry Price": (450, 505),
@@ -107,7 +110,7 @@ if submitted:
     draw_text(draw, positions["Mark Price"], f"${mark_price}", max_width, base_font_size, color="white")
     draw_text(draw, positions["ATH"], f"${ath}", max_width, base_font_size, color="white")
 
-    # Draw percent in green/blue
+    # Draw percentage
     draw_text(draw, positions["%"], percent_change, max_width, percent_font_size, color="#12ee0e")
 
     # ✅ Display image (no caption)
@@ -116,7 +119,7 @@ if submitted:
     # ✅ Bottom Banner (Large Font)
     st.markdown(
         "<div style='background-color:#0E1117; padding:10px; border-radius:8px;'>"
-        "<p style='text-align:center; color:white; font-size:1.5em;'>📱 Long Press → Share or Save </p>"
+        "<p style='text-align:center; color:white; font-size:2.5em;'>📱 Long Press Image to Save to Photos</p>"
         "</div>",
         unsafe_allow_html=True
     )
