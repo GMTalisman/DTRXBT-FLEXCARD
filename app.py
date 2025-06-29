@@ -106,13 +106,13 @@ if submitted:
     # Draw percent in green/blue
     draw_text(draw, positions["%"], percent_change, max_width, percent_font_size, color="#12ee0e")
 
-    # ✅ Long Press Save Image Preview
-    st.image(img, caption="✅ On mobile: Long press → 'Add to Photos' or 'Save Image'", use_container_width=True)
+    # ✅ Display image (no caption)
+    st.image(img, use_container_width=True)
 
-    # ✅ Big Banner at Bottom (2.5x font size)
+    # ✅ Bottom Banner (Large Font)
     st.markdown(
         "<div style='background-color:#0E1117; padding:10px; border-radius:8px;'>"
-        "<p style='text-align:center; color:white; font-size:2.5em;'>📱Mobile: Long Press Image to Save </p>"
+        "<p style='text-align:center; color:white; font-size:2.5em;'>📱 Long Press Image to Save to Photos</p>"
         "</div>",
         unsafe_allow_html=True
     )
