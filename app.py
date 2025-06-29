@@ -107,19 +107,33 @@ if submitted:
     draw_text(draw, positions["%"], percent_change, max_width, percent_font_size, color="#12ee0e")
 
     # Show image
-    st.image(img, caption="Generated Image", use_container_width=True)
+    st.image(img, caption="Generated Image", use_container_width=# ✅ Long Press Save Preview
+st.subheader("📱 Long Press Image to Save to Photos")
+st.image(img, caption="✅ On mobile: Long press → 'Add to Photos' or 'Save Image'", use_container_width=True)
 
-    # ✅ Long Press Save Preview for Mobile
-    st.subheader("📱 Long Press Image to Save to Photos")
-    st.image(img, caption="✅ On mobile: Long press → 'Add to Photos' or 'Save Image'", use_container_width=True)
+# ✅ Banner above download buttons
+st.info("📱 On mobile: Long press and hold the image above to save it directly to Photos or Gallery.")
 
-    # Download button
-    output_path = "output.png"
-    img.save(output_path)
-    with open(output_path, "rb") as file:
-        st.download_button(
-            label="📥 Download Image",
-            data=file,
-            file_name="DTR_image.png",
-            mime="image/png"
-        )
+# ✅ Save PNG
+output_png = "output.png"
+img.save(output_png)
+
+with open(output_png, "rb") as file:
+    st.download_button(
+        label="📥 Download PNG",
+        data=file,
+        file_name="DTR_image.png",
+        mime="image/png"
+    )
+
+# ✅ Save JPEG (convert from RGBA to RGB to avoid transparency issues)
+output_jpg = "output.jpg"
+img.convert('RGB').save(output_jpg, "JPEG")
+
+with open(output_jpg, "rb") as file:
+    st.download_button(
+        label="📥 Download JPEG",
+        data=file,
+        file_name="DTR_image.jpg",
+        mime="image/jpeg"
+    )
