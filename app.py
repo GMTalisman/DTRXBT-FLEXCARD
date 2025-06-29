@@ -2,8 +2,8 @@ import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 import os
 
-st.set_page_config(page_title="DTR Image Generator", layout="centered")
-st.title("🔐 DTR Image Generator")
+st.set_page_config(page_title="DTRXBT FLEX CARD", layout="centered")
+st.title("DTRXBT FLEX CARD")
 
 # Load template
 try:
